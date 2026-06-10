@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLOSED — 1985 | Ellie Dalseg | AI + Design</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADING SCREEN — plays a VHS security-camera sequence
+       before the site is revealed.
+       ============================================================ -->
+  <div id="loader">
+    <canvas id="loader-static"></canvas>
+    <div id="loader-scanline"></div>
+
+    <!-- Security-camera corner labels -->
+    <div id="loader-ui">
+      <div id="loader-topleft">WESTFIELD MALL — SECURITY SYSTEM</div>
+      <div id="loader-topright">CAM 07 &nbsp; 11/14/1985 &nbsp; 23:47</div>
+      <div id="loader-rec"><span class="rec-dot"></span> REC</div>
+    </div>
+
+    <!-- Center: log lines then title crash-in -->
+    <div id="loader-center">
+      <div id="loader-lines" aria-live="polite"></div>
+      <div id="loader-main-title">CLOSED</div>
+      <div id="loader-main-sub">— 1985 —</div>
+      <div id="loader-enter">[ CLICK OR PRESS ANY KEY TO ENTER ]</div>
+    </div>
+  </div>
+
+  <!-- Static burst overlay (used by loader) -->
+  <canvas id="static-burst"></canvas>
+
+  <!-- ============================================================
+       ATMOSPHERE OVERLAYS (always visible, behind everything else)
+       ============================================================ -->
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+  <canvas id="noise"></canvas>
+
+  <!-- Harold ghost silhouette — appears rarely in the corner -->
+  <div id="harold-ghost" aria-hidden="true">
+    <div style="position:relative;">
+      <div class="harold-arm-left"></div>
+      <div class="harold-arm-right"></div>
+      <div class="harold-head"></div>
+      <div class="harold-neck"></div>
+      <div class="harold-torso"></div>
+    </div>
+    <div class="harold-legs">
+      <div class="harold-leg"></div>
+      <div class="harold-leg"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LIGHTBOX (click any image to enlarge)
+       ============================================================ -->
+  <div id="lightbox" role="dialog" aria-label="Image lightbox">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION (appears after scrolling past landing)
+       ============================================================ -->
+  <nav id="site-nav" aria-label="Site navigation">
+    <a href="#landing" class="nav-brand">CLOSED — 1985</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+      <li><a href="https://closed1985.netlify.app/" target="_blank" class="nav-play">▶ Play</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       SECTION 1 — LANDING
+       Game title screen. Matches the actual game's start screen.
+       ============================================================ -->
+  <section id="landing">
+    <canvas id="landing-static" aria-hidden="true"></canvas>
+
+    <div class="landing-content">
+      <h1 class="game-title">CLOSED</h1>
+      <p class="game-date-line">Westfield Mall — Night Shift — 11/14/1985</p>
+      <p class="game-byline">Ellie Dalseg &nbsp;|&nbsp; AI + Design &nbsp;|&nbsp; 2026</p>
+
+      <nav aria-label="Jump to section">
+        <ul class="landing-menu">
+          <li><a href="#about">About the Project</a></li>
+          <li><a href="#research">Research Dashboard</a></li>
+          <li><a href="#process">Process &amp; Iterations</a></li>
+          <li><a href="#product">The Final Game</a></li>
+          <li><a href="#reflection">What I Learned</a></li>
+          <li class="play-cta"><a href="https://closed1985.netlify.app/" target="_blank" rel="noopener">▶ Play the Game</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <span class="scroll-hint">Scroll to Enter</span>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — ABOUT
+       Project overview, inquiry question, starting point.
+       ============================================================ -->
+  <section id="about">
+    <div class="section-inner">
+
+      <p class="room-label">Security Room</p>
+      <h2 class="section-title">About the Project</h2>
+      <div class="divider"></div>
+
+      <p class="reveal">
+        I used Claude Code to build a fully playable, atmosphere-driven 3D horror game set in an
+        abandoned 1985 shopping mall — exploring what AI is truly capable of in game production
+        and what it means to co-create something with it.
+      </p>
+
+      <!-- Inquiry question — the driving question of the project -->
+      <div class="inquiry-block reveal">
+        <p class="inquiry-label">Inquiry Question</p>
+        <p class="inquiry-question">
+          What is AI truly capable of when it comes to game production —
+          and how easily can it make something complex?
+        </p>
+      </div>
+
+      <!-- Starting Point and Why It Mattered -->
+      <div class="two-col">
+        <div class="col-block reveal reveal-left">
+          <h3>Starting Point</h3>
+          <p>
+            The project started with a big idea: make an open-world 3D game entirely with AI.
+            I thought that would really test the limits of what AI could do. But as I got
+            further in, I realized that scope was probably too large for a school project timeline.
+          </p>
+          <p>
+            While doing research, I noticed that most people on YouTube who were making games
+            with AI were making horror games — the genre is more linear, more contained, and
+            easier to scope. So I pivoted. The horror direction wasn't originally planned; it
+            came out of research and practical thinking.
+          </p>
+        </div>
+
+        <div class="col-block reveal reveal-delay-2">
+          <h3>Why This Question Mattered</h3>
+          <p>
+            I want to go into game design as a career. The fear of AI taking jobs in that
+            industry has always been in the back of my mind. This project was my way of
+            actually confronting that fear directly instead of just worrying about it.
+          </p>
+          <p>
+            I wanted to understand what AI can and can't do, and figure out how I could work
+            alongside it rather than be replaced by it.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — RESEARCH DASHBOARD
+       Six sources, research visuals, key finding.
+       ============================================================ -->
+  <section id="research">
+    <div class="section-inner">
+
+      <p class="room-label">Central Hub</p>
+      <h2 class="section-title">Research Dashboard</h2>
+      <div class="divider"></div>
+
+      <p>
+        My research was hands-on and comparative. I didn't just read — I watched people do it,
+        took notes, used NotebookLM to make mind maps and flashcards, and then immediately
+        tested what I learned in my own project. Every source was evaluated against what I was
+        actually experiencing in my own process.
+      </p>
+
+      <!-- Six source cards — styled as case files -->
+      <div class="source-grid">
+
+        <article class="source-card reveal reveal-delay-1">
+          <p class="source-num">Source 01</p>
+          <p class="source-type">YouTube — Case Study / Experiment</p>
+          <h3>"I Made 6 AIs WORK TOGETHER to Make a Horror Game"</h3>
+          <p>
+            Using multiple specialized AI tools creates a faster but fragmented workflow —
+            human input is still necessary to refine, connect, and direct outputs into a
+            cohesive final product.
+          </p>
+          <p class="source-engagement">
+            <span>How I used it:</span> Watched the full video, took notes on each AI tool's role, used AI to summarize the process into clearer steps, and built a workflow diagram.
+          </p>
+          <p class="source-engagement">
+            <span>What it changed:</span> Taught me to plan for editing and refining AI outputs rather than expecting perfect results — and gave me early confidence the project was possible.
+          </p>
+          <a href="https://www.youtube.com/watch?v=ziHb6yAVVRw" target="_blank" rel="noopener">↗ View Source</a>
+        </article>
+
+        <article class="source-card reveal reveal-delay-2">
+          <p class="source-num">Source 02</p>
+          <p class="source-type">YouTube — Case Study / Experiment</p>
+          <h3>"AI Builds a Horror Game From Scratch in 7 Days"</h3>
+          <p>
+            Documents using ChatGPT to build a complete horror game in one week. AI works
+            best as an assistant, not an independent creator — the human still has to direct,
+            test, and fix.
+          </p>
+          <p class="source-engagement">
+            <span>How I used it:</span> Compared findings against Source 01, made flashcards and a data comparison table using NotebookLM.
+          </p>
+          <p class="source-engagement">
+            <span>What it changed:</span> Reinforced keeping my scope small — even with AI, the process still requires constant testing and revision at every step.
+          </p>
+          <a href="https://www.youtube.com/watch?v=MM-4CphkaGE" target="_blank" rel="noopener">↗ View Source</a>
+        </article>
+
+        <article class="source-card reveal reveal-delay-3">
+          <p class="source-num">Source 03</p>
+          <p class="source-type">AWS Blog — Industry Article</p>
+          <h3>"AI-Assisted Game Production: From Static Concept to Interactive Prototype"</h3>
+          <p>
+            Introduces "Agentic Arcade" — four specialized AI agents mirroring a professional
+            studio workflow, each handling a distinct stage of production.
+          </p>
+          <p class="source-engagement">
+            <span>How I used it:</span> Read the full article, extracted the main ideas, and made a mind map and infographic in NotebookLM.
+          </p>
+          <p class="source-engagement">
+            <span>What it changed:</span> Made me structure my project in stages — instead of one huge prompt, I gave Claude a specific role at each step of the build.
+          </p>
+          <a href="https://aws.amazon.com/blogs/gametech/ai-assisted-game-production-from-static-concept-to-interactive-prototype/" target="_blank" rel="noopener">↗ View Source</a>
+        </article>
+
+        <article class="source-card reveal reveal-delay-4">
+          <p class="source-num">Source 04</p>
+          <p class="source-type">Odin Law — Industry / Legal</p>
+          <h3>"The Game Developer's Guide to AI Governance"</h3>
+          <p>
+            A reality check on the legal and ethical risks of AI in game dev — copyright,
+            IP ownership, and accountability. A counterpoint to the more optimistic sources.
+          </p>
+          <p class="source-engagement">
+            <span>How I used it:</span> Read the full article and pulled out the legal and ethical risks that relate to student and indie game dev. Made an infographic and slide deck in NotebookLM.
+          </p>
+          <p class="source-engagement">
+            <span>What it changed:</span> Made me think about who owns what AI generates — even at a student project level, those questions are worth having answers to.
+          </p>
+          <a href="https://odinlaw.com/blog-ai-governance-in-game-development/" target="_blank" rel="noopener">↗ View Source</a>
+        </article>
+
+        <article class="source-card reveal reveal-delay-5">
+          <p class="source-num">Source 05</p>
+          <p class="source-type">GoodFirms — Industry Snapshot</p>
+          <h3>"AI in Game Development: How It's Reshaping Studios, Tools &amp; Player Experiences in 2026"</h3>
+          <p>
+            90% of developers are already using AI in their workflows. 7,300+ Steam games now
+            report using generative AI. The "new generalist" framing — directing AI across
+            disciplines instead of specializing in one.
+          </p>
+          <p class="source-engagement">
+            <span>How I used it:</span> Cross-referenced industry stats against the other sources and made a data table and mind map in NotebookLM.
+          </p>
+          <p class="source-engagement">
+            <span>What it changed:</span> The "new generalist" framing shifted how I thought about my own role — the skill isn't mastering one tool, it's knowing how to direct AI across different tasks.
+          </p>
+          <a href="https://www.goodfirms.co/blog/ai-in-game-development-studios-tools-experiences" target="_blank" rel="noopener">↗ View Source</a>
+        </article>
+
+        <article class="source-card reveal reveal-delay-5">
+          <p class="source-num">Source 06</p>
+          <p class="source-type">Capitol Technology University — Academic</p>
+          <h3>"AI in Video Game Development: From Smarter NPCs to Procedural Worlds"</h3>
+          <p>
+            Covers smarter NPC behavior, procedural world generation, dynamic storytelling,
+            and personalized gameplay as practical applications already in use in modern games.
+          </p>
+          <p class="source-engagement">
+            <span>How I used it:</span> Compared the article's examples against the HollowWolf video and expanded my mind map on AI-assisted game development.
+          </p>
+          <p class="source-engagement">
+            <span>What it changed:</span> Gave me specific ideas for keeping the game simple and atmosphere-focused — AI could handle code and troubleshooting while I focused on design and feel.
+          </p>
+          <a href="https://www.captechu.edu/blog/ai-in-video-game-development" target="_blank" rel="noopener">↗ View Source</a>
+        </article>
+
+      </div>
+
+      <!-- Key finding from research -->
+      <div class="finding-block">
+        <h3>What I Found</h3>
+        <p>
+          Most creators I researched used multiple different AI models — one for writing, one
+          for art, one for code, one for sound. My professor told me Claude Code could handle
+          all of it if I directed it well enough, so I committed to a single-tool approach.
+          That was a real constraint but it worked.
+        </p>
+        <p>
+          The biggest finding wasn't about the technology itself — it was about the role the
+          human plays. AI can execute fast, but it can't tell you when something feels wrong.
+          That judgment has to come from you.
+        </p>
+      </div>
+
+      <!-- Research visuals: mind maps, infographics, flow charts -->
+      <p class="room-label" style="margin-top: 40px;">Research Visuals</p>
+      <div class="research-images">
+        <img src="research/source-1-flow.png"        alt="Source 1 — mind map" />
+        <img src="research/source-1-notes.png"       alt="Source 1 — notes" />
+        <img src="research/source-2-flow.png"        alt="Source 2 — mind map" />
+        <img src="research/source-3-flow.png"        alt="Source 3 — mind map" />
+        <img src="research/source-3-infographic.png" alt="Source 3 — infographic" />
+        <img src="research/source-4-infographic.png" alt="Source 4 — infographic" />
+        <img src="research/source-5-flow.png"        alt="Source 5 — mind map" />
+        <img src="research/source-5-table.png"       alt="Source 5 — data table" />
+        <img src="research/source-6-table.png"        alt="Source 6 — data table" />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — PROCESS
+       Workflow, pivots, ChatGPT vs Claude, videos, notebook.
+       ============================================================ -->
+  <section id="process">
+    <div class="section-inner">
+
+      <p class="room-label">Maintenance Corridor</p>
+      <h2 class="section-title">Process &amp; Iterations</h2>
+      <div class="divider"></div>
+
+      <p>
+        The workflow was daily, iterative, and notebook-driven. I would play through the current
+        version, write down everything that felt wrong or missing in a physical notebook, then
+        feed those notes back to Claude as a new set of instructions.
+      </p>
+
+      <!-- Quick stats -->
+      <div class="process-stats">
+        <div class="stat-block reveal">
+          <span class="stat-num">40+</span>
+          <span class="stat-label">Total Versions</span>
+          <span class="stat-sub">ChatGPT + Claude</span>
+        </div>
+        <div class="stat-block reveal reveal-delay-1">
+          <span class="stat-num">27</span>
+          <span class="stat-label">Claude Versions</span>
+          <span class="stat-sub">Claude Code only</span>
+        </div>
+        <div class="stat-block reveal reveal-delay-2">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Weeks of Work</span>
+        </div>
+        <div class="stat-block reveal reveal-delay-3">
+          <span class="stat-num">1</span>
+          <span class="stat-label">AI Tool Used</span>
+          <span class="stat-sub">Claude Code</span>
+        </div>
+        <div class="stat-block reveal reveal-delay-4">
+          <span class="stat-num">7</span>
+          <span class="stat-label">VHS Tapes Written</span>
+        </div>
+        <div class="stat-block reveal reveal-delay-5">
+          <span class="stat-num">2,561</span>
+          <span class="stat-label">Lines of Code</span>
+        </div>
+      </div>
+
+      <!-- Static Bloom — original concept before the pivot -->
+      <div class="concept-block reveal">
+        <span class="concept-label">Where It Started — Original Concept</span>
+        <h3 class="concept-title">Static Bloom</h3>
+        <p>
+          The first concept fed into ChatGPT was called Static Bloom — a 3D atmospheric
+          exploration game set in a flooded future city where dead shopping malls come back to
+          life when music is restored to them. Players would explore giant abandoned malls as a
+          "Signal Diver," collecting lost audio fragments and using soundwaves to unlock hidden
+          memories and physically transform the environment. Environments would shift with the
+          beat, stores would regrow neon gardens, and mannequins would act out frozen memories.
+        </p>
+        <p>
+          ChatGPT couldn't get anywhere near the visual complexity or atmosphere the concept
+          needed — after weeks of trial and error it was still producing empty white-walled
+          rooms. The scope was stripped down: the flooded future city became an abandoned 1985
+          mall, the music mechanic became a VHS tape system, and the transforming environments
+          became static atmospheric horror. Static Bloom became CLOSED 1985 — same liminal mall
+          setting, same atmospheric ambition, built around what was actually achievable.
+        </p>
+      </div>
+
+      <!-- Visual comparison — same moment, different tools -->
+      <p class="room-label" style="margin-top: 40px;">Visual Comparison — First Load-In, Different Tools</p>
+      <p>Both screenshots show the first moment of loading into the game. Left is the ChatGPT version; right is the first Claude Code build.</p>
+      <div class="visual-compare reveal">
+        <div class="visual-compare-col chatgpt-v">
+          <img src="images/week-6-pic-1.png" alt="ChatGPT version — first game load, white walls no atmosphere" />
+          <div class="visual-compare-label chatgpt-label">ChatGPT — Early Version</div>
+        </div>
+        <div class="visual-compare-col claude-v">
+          <img src="images/week-7-pic-1.png" alt="Claude Code — first playable build, dark atmosphere and lighting" />
+          <div class="visual-compare-label claude-label">Claude Code — First Build</div>
+        </div>
+      </div>
+
+      <!-- ChatGPT vs Claude comparison -->
+      <p class="room-label" style="margin-top: 40px;">Tool Comparison — Same Vision, Different Results</p>
+      <div class="comparison-grid">
+        <div class="comparison-col chatgpt">
+          <h3>ChatGPT (Early Stage)</h3>
+          <ul>
+            <li>White walls, white floor, no ceiling</li>
+            <li>No sound, no atmosphere, no color</li>
+            <li>Could not get past basic geometry</li>
+            <li>Ignored visual references and images</li>
+            <li>Broke down with complex instructions</li>
+            <li>Weeks of trial and error with little progress</li>
+          </ul>
+        </div>
+        <div class="comparison-col claude-col">
+          <h3>Claude Code (Primary Tool)</h3>
+          <ul>
+            <li>Dark lighting and atmosphere on the first attempt</li>
+            <li>Understood visual references immediately</li>
+            <li>Built dingy wallpaper, ambient sound, and fog</li>
+            <li>Handled complex multi-room 3D level design</li>
+            <li>Implemented AI behavior for Harold</li>
+            <li>Produced a playable game in the same session</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Major pivots in the project -->
+      <p class="room-label" style="margin-top: 40px;">Major Pivots</p>
+      <ol class="pivot-list reveal">
+        <li>
+          <span class="pivot-num">01</span>
+          <div class="pivot-content">
+            <h4>Open-World → Horror</h4>
+            <p>
+              Originally planned an open-world 3D game to fully stress-test AI capabilities.
+              Pivoted to horror after research showed that was too large a scope for the timeline
+              — and that most successful AI game experiments were horror games.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="pivot-num">02</span>
+          <div class="pivot-content">
+            <h4>ChatGPT → Claude Code</h4>
+            <p>
+              The single biggest turning point of the project. Stopped wasting time with a tool
+              that could not produce what I needed. Claude Code immediately understood my vision
+              and aesthetic direction in a way ChatGPT never did.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="pivot-num">03</span>
+          <div class="pivot-content">
+            <h4>Harold's Design — Three Versions</h4>
+            <p>
+              Started as a white rectangle (ChatGPT), became a simple pale figure (early Claude),
+              then evolved into the final unsettling, asymmetric, blood-smeared janitor after
+              multiple rounds of increasingly specific direction from me.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="pivot-num">04</span>
+          <div class="pivot-content">
+            <h4>Maze Backroom — Rebuilt Three Times</h4>
+            <p>
+              First version was solvable in seconds. Second had a wall blocking the only valid
+              path to the key. Third is a verified serpentine design that forces four full-room-length
+              runs before you reach the northeast corner.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="pivot-num">05</span>
+          <div class="pivot-content">
+            <h4>Exit Sequence — From Browser Prompt to Full Chase</h4>
+            <p>
+              Originally just a browser prompt asking for the door code — felt completely out of
+              place. Rebuilt into a proper HTML keypad overlay, a full-screen "RUN." warning,
+              an accelerating heartbeat, and a permanent final chase.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <!-- Gameplay progression videos -->
+      <p class="room-label" style="margin-top: 40px;">Gameplay Progression</p>
+      <div class="video-grid">
+        <div class="video-frame">
+          <div class="video-label"><span class="rec-dot"></span> Early ChatGPT Demo</div>
+          <iframe
+            src="https://www.youtube.com/embed/_5vEGTjtcaU"
+            title="Early ChatGPT game demo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+           >
+          </iframe>
+        </div>
+        <div class="video-frame">
+          <div class="video-label"><span class="rec-dot"></span> Early Claude Version</div>
+          <iframe
+            src="https://www.youtube.com/embed/dEv-0jhjZIo"
+            title="Early Claude Code game version"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+           >
+          </iframe>
+        </div>
+        <div class="video-frame">
+          <div class="video-label"><span class="rec-dot"></span> Version 8</div>
+          <iframe
+            src="https://www.youtube.com/embed/xMTTuePbIPo"
+            title="Game version 8"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+           >
+          </iframe>
+        </div>
+        <div class="video-frame">
+          <div class="video-label"><span class="rec-dot"></span> Version 19</div>
+          <iframe
+            src="https://www.youtube.com/embed/VDmnJ-Zgy1s"
+            title="Game version 19"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+           >
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Game screenshot progression: weeks 6 and 7 (both Claude Code) -->
+      <p class="room-label" style="margin-top: 40px;">Early Claude Builds — Week 6</p>
+      <p>These are among the first Claude Code builds — dark lighting, wallpaper textures, and atmosphere present from the start.</p>
+      <div class="screenshot-grid">
+        <img src="images/week-6-pic-1.png" alt="Week 6 Claude build — security room entrance" />
+        <img src="images/week-6-pic-2.png" alt="Week 6 Claude build — dark corridor" />
+        <img src="images/week-6-pic-3.png" alt="Week 6 Claude build — early room layout" />
+        <img src="images/week-6-pic-4.png" alt="Week 6 Claude build — lighting test" />
+        <img src="images/week-6-pic-5.png" alt="Week 6 Claude build — early atmosphere" />
+        <img src="images/week-6-pic-6.png" alt="Week 6 Claude build — hallway view" />
+      </div>
+
+      <p class="room-label" style="margin-top: 32px;">First Full Claude Builds — Week 7</p>
+      <p>Week 7 was a full restart in Claude Code with the complete horror concept in place — rooms, layout, Harold, and VHS tape system all building out.</p>
+      <div class="screenshot-grid">
+        <img src="images/week-7-pic-1.png" alt="Week 7 — first full Claude build, game load-in" />
+        <img src="images/week-7-pic-2.png" alt="Week 7 — security room taking shape" />
+        <img src="images/week-7-pic-3.png" alt="Week 7 — arcade room early build" />
+        <img src="images/week-7-pic-4.png" alt="Week 7 — hallway with Harold" />
+        <img src="images/week-7-pic-5.png" alt="Week 7 — toy store early build" />
+        <img src="images/week-7-pic-6.png" alt="Week 7 — VHS tape system working" />
+        <img src="images/week-7-pic-7.png" alt="Week 7 — playplace room" />
+        <img src="images/week-7-pic-8.png" alt="Week 7 — central hub area" />
+      </div>
+
+      <!-- Notebook photos -->
+      <p class="room-label" style="margin-top: 40px;">Playtest Notes — Physical Notebook</p>
+      <p>
+        Every version was playtested manually. Issues, ideas, and changes were written in a
+        physical notebook and fed back to Claude as the next set of instructions.
+      </p>
+      <div class="notes-grid reveal">
+        <img src="notes/notes-1.png" alt="Playtest notebook page 1" />
+        <img src="notes/notes-2.png" alt="Playtest notebook page 2" />
+        <img src="notes/notes-3.png" alt="Playtest notebook page 3" />
+        <img src="notes/notes-4.png" alt="Playtest notebook page 4" />
+        <img src="notes/notes-5.png" alt="Playtest notebook page 5" />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — PRODUCT / OUTCOME
+       Playable game embed, final screenshots, authorship.
+       ============================================================ -->
+  <section id="product">
+    <div class="section-inner">
+
+      <p class="room-label">Security Room — Final Tape</p>
+      <h2 class="section-title">The Final Game</h2>
+      <div class="divider"></div>
+
+      <p>
+        <strong>CLOSED — 1985</strong> is a fully playable browser-based 3D horror game. You play
+        as a mall security guard on the overnight shift of November 14, 1985. The power goes out.
+        The exits lock. Something is wrong. As you explore the abandoned corridors of Westfield Mall,
+        you find 7 VHS tapes left behind by former employees. Each tape reveals more about Harold
+        Finch — the janitor who died in this mall and never left. The final tape gives you the exit
+        code. But the moment you have it, Harold knows. And the chase begins.
+      </p>
+
+      <!-- Playable game embed -->
+      <div class="game-embed-wrap">
+        <div class="monitor-header">
+          <span class="rec-dot"></span>
+          Westfield Mall Security Feed — Live
+        </div>
+        <iframe
+          src="https://closed1985.netlify.app/"
+          title="Play CLOSED — 1985"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+        <a
+          href="https://closed1985.netlify.app/"
+          target="_blank"
+          rel="noopener"
+          class="embed-fallback">
+          ↗ Open in Full Screen
+        </a>
+      </div>
+
+      <!-- Final game screenshots — Week 8 is the final version -->
+      <p class="room-label" style="margin-top: 40px;">Final Game Screenshots — Version 27</p>
+      <div class="screenshot-grid">
+        <img src="images/week-8-pic-1.png"  alt="Final game — security room" />
+        <img src="images/week-8-pic-2.png"  alt="Final game — hallway" />
+        <img src="images/week-8-pic-3.png"  alt="Final game — arcade" />
+        <img src="images/week-8-pic-4.png"  alt="Final game — toy store" />
+        <img src="images/week-8-pic-5.png"  alt="Final game — playplace" />
+        <img src="images/week-8-pic-6.png"  alt="Final game — clothing store" />
+        <img src="images/week-8-pic-7.png"  alt="Final game — VHS tape screen" />
+        <img src="images/week-8-pic-8.png"  alt="Final game — Harold in hallway" />
+        <img src="images/week-8-pic-9.png"  alt="Final game — maintenance backroom" />
+        <img src="images/week-8-pic-10.png" alt="Final game — central hub" />
+        <img src="images/week-8-pic-11.png" alt="Final game — death screen" />
+        <img src="images/week-8-pic-12.png" alt="Final game — win screen" />
+      </div>
+
+      <!-- Authorship — I was the director -->
+      <div class="authorship-block">
+        <h3>Authorship — I Was the Director</h3>
+        <p>
+          Every major decision in this game came from me. Claude was the technical executor —
+          I was the director. I described Harold's appearance in detail until he looked right.
+          I designed the lore system across all 7 tapes. I decided the mall layout, which rooms
+          existed, what was in them, and how the lighting should feel.
+        </p>
+        <p>
+          I playtested every version and kept notes on what was broken, what wasn't scary
+          enough, what felt off. I made Harold scarier by specifying exactly what uncanny
+          meant — too tall, asymmetric, rotting, like he'd been there a long time. None of
+          that came from AI. The AI made it real. I decided what it should be.
+        </p>
+        <p>
+          The game draws references from Slender Man, Silent Hill, FNAF, and backrooms/liminal
+          space aesthetics — I pulled what I liked from each and cut what didn't fit the scope
+          or tone I was going for.
+        </p>
+      </div>
+
+      <!-- Technical specs -->
+      <p class="room-label" style="margin-top: 40px;">Technical Specs</p>
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span class="spec-label">Engine</span>
+          <span class="spec-value">Three.js (r128)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">File</span>
+          <span class="spec-value">Single HTML file</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Lines of Code</span>
+          <span class="spec-value">~2,561</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Render Style</span>
+          <span class="spec-value">PS1 low-res pipeline</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Audio</span>
+          <span class="spec-value">Procedural (Web Audio API)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Collision</span>
+          <span class="spec-value">AABB system</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Monster AI</span>
+          <span class="spec-value">3 modes: dormant / lurking / chasing</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Versions</span>
+          <span class="spec-value">27 in Claude Code / 40+ total</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6 — REFLECTION
+       What changed, what I learned, what's next.
+       ============================================================ -->
+  <section id="reflection">
+    <div class="section-inner">
+
+      <p class="room-label">Exit Corridor</p>
+      <h2 class="section-title">What I Learned</h2>
+      <div class="divider"></div>
+
+      <div class="reflection-blocks">
+
+        <div class="reflection-block reveal">
+          <h3>What Changed in My Thinking</h3>
+          <p>
+            The fear of AI replacing me is still real, but it's more specific now. I understand
+            better what AI can and can't do. It can't have taste. It can't decide what feels
+            scary. It can't know when something is almost right but not quite there yet. That
+            judgment is mine.
+          </p>
+          <p>
+            I came into this project thinking AI might be able to replace what I do. I'm leaving
+            it understanding that what makes a game designer valuable isn't just the ability to
+            produce — it's the ability to know what good looks like and keep pushing until you
+            get there. AI can't do that. I can.
+          </p>
+        </div>
+
+        <div class="reflection-block reveal reveal-delay-2">
+          <h3>What Clicked</h3>
+          <p>
+            The moment I switched from ChatGPT to Claude Code was the biggest turning point of
+            the whole project. The same vision, the same references, the same prompts — completely
+            different results. That experience made me realize that "using AI" isn't one skill. It's
+            about knowing which tool fits the task, and being specific enough to actually get what
+            you want out of it.
+          </p>
+          <p>
+            Working with AI is a skill — and like any skill, the more intentional you are about it,
+            the better the results. Vague prompts produce vague results. Knowing what you want
+            clearly enough to describe it is the whole job.
+          </p>
+        </div>
+
+        <div class="reflection-block reveal reveal-delay-4">
+          <h3>What I Would Do Next</h3>
+          <p>
+            If I started over: I'd skip ChatGPT entirely and go straight to Claude Code. And I'd
+            come in with a clearer plan — not a finished design, but at least a tighter sense of
+            scope and what I was actually trying to make.
+          </p>
+          <p>
+            I'd also want to experiment with using multiple specialized AI tools the way the
+            creators I researched did — one for character design, one for sound design, one for
+            coding — and see whether that produces a more polished final product or just more
+            fragmentation. That's the next question I'd want to answer.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Condensed lessons list -->
+      <p class="room-label" style="margin-top: 40px;">Key Takeaways</p>
+      <ul class="lessons-list">
+        <li>Not all AI tools are equal for the same task. ChatGPT and Claude Code produced completely different results from the same prompt and vision.</li>
+        <li>The most important skill in AI-assisted creative work is knowing what you want clearly enough to describe it. Vision has to come first.</li>
+        <li>AI can execute fast, but it can't judge. The human creative eye — knowing when something feels wrong, scary, off, or right — is still entirely irreplaceable.</li>
+        <li>I don't think AI is going to take my job. But I do think it's going to change what the job looks like. The people who thrive will be the ones who know how to direct it.</li>
+        <li>Building something you're genuinely passionate about makes the hard parts worth it. This never felt like homework.</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-title">CLOSED — 1985</p>
+
+      <nav class="footer-links" aria-label="External links">
+        <a href="https://closed1985.netlify.app/" target="_blank" rel="noopener" class="play-link">
+          ▶ Play the Game
+        </a>
+        <a href="https://chatgpt.com/share/6a1d00be-efac-83e8-a860-933df9e9890c" target="_blank" rel="noopener">
+          Planning Chat (ChatGPT)
+        </a>
+        <a href="https://chatgpt.com/share/6a2075ec-00d0-83e8-8c2b-a69aa90f7b25" target="_blank" rel="noopener">
+          Production Chat (ChatGPT)
+        </a>
+        <a href="research/dev-log.pdf" target="_blank">
+          Dev Log PDF
+        </a>
+      </nav>
+
+      <p class="footer-meta">
+        Ellie Dalseg &nbsp;|&nbsp; AI + Design 374 &nbsp;|&nbsp; 2026<br />
+        Built with Claude Code &nbsp;|&nbsp; Three.js &nbsp;|&nbsp; HTML + CSS
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
